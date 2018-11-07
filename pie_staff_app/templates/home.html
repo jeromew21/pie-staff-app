@@ -2,5 +2,5 @@
 
 {% block content %}
 	<p>Hello, {{ user.username }}</p>
-	<a href="/logout">Log out</a>
+	{{ content |safe }}
 {% endblock %}

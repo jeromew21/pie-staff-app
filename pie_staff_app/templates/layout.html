@@ -1,9 +1,19 @@
 <html>
     <head>
         <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/favicon.ico"/>
+        <title>PiE</title>
     </head>
     <body>
         {% block content %}
         {% endblock %}
+        {% if user.is_authenticated %}
+            <p>
+                <a href="/newIssue/">New issue</a>
+                <a href="/newSnippet/">New snippet</a>
+                <a href="/snippets/">View snippets</a>
+                <a href="/logout/">Log out</a>
+            </p>
+        {% endif %}
+        <p><a href="/">Home</a></p>
     </body>
 </html>

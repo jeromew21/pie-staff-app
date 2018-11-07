@@ -30,8 +30,16 @@ class PieUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+    
+    assignedIssues = models.ManyToManyField("Issue")
 
 class Snippet(models.Model):
-    content = models.TextField()
-    name = models.CharField(max_length=255)
-    author = models.ForeignKey("PieUser", on_delete=models.DO_NOTHING)
+    content = models.TextField(default="")
+    name = models.CharField(max_length=255, unique=True)
+    author = models.ForeignKey("PieUser", on_delete=models.CASCADE, null=True)
+
+class Issue(models.Model):
+    content = models.TextField(default="")
+    name = models.CharField(max_length=255, unique=True)
+    author = models.ForeignKey("PieUser", on_delete=models.CASCADE, null=True)
+    completed = models.BooleanField(default=False)
