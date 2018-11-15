@@ -43,3 +43,5 @@ class Issue(models.Model):
     name = models.CharField(max_length=255, unique=True)
     author = models.ForeignKey("PieUser", on_delete=models.CASCADE, null=True)
     completed = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+    

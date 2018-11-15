@@ -9,16 +9,23 @@
         </style>
     </head>
     <body>
+        {% if user.is_authenticated %}
+	        <p>Logged in as {{ user.username }}</p>
+        {% endif %}
+
         {% block content %}
         {% endblock %}
         {% if user.is_authenticated %}
             <p>
                 <a href="/newIssue/">New issue</a>
+                <a href="/issues/">View issues</a>
                 <a href="/newSnippet/">New snippet</a>
                 <a href="/snippets/">View snippets</a>
-                <a href="/logout/">Log out</a>
+            </p>
+            <p>
+                <a href="/logout/">Log out</a>                
+                <a href="/">Home</a>
             </p>
         {% endif %}
-        <p><a href="/">Home</a></p>
     </body>
 </html>

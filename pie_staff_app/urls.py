@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth import views as authViews
 from .views import domainErrorView, publicSnippetView, \
     home, SnippetEditView, SnippetCreateView, SnippetsView, logoutView, CreateIssueView, \
-    IssuesView
+    AllIssuesView, IssueView
 
 urlpatterns = [
     url(r'^login/$', authViews.LoginView.as_view(), name='login'),
@@ -17,6 +17,7 @@ urlpatterns = [
     path('snippet/', SnippetsView.as_view()),
     path('snippets/', SnippetsView.as_view()),
     path('newIssue/', CreateIssueView.as_view()),
-    path('issues/', IssuesView.as_view()),
+    path('issue/<int:pk>/', IssueView.as_view()),
+    path('issues/', AllIssuesView.as_view()),
     url(r'^$', home, name='home'),
 ]

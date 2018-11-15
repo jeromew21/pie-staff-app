@@ -27,12 +27,22 @@ def domainErrorView(request):
 
 def renderIssues():
     content = "<h1>Issues</h1>"
-    content += ' '.join(f"<div><a href='/snippet/{issue.name}/edit/'>{issue.name}</a></div>" for issue in Issue.objects.all())
+    content += ' '.join(f"<div><a href='/issue/{issue.pk}/'>{issue.name}</a> {issue.date}</div>" for issue in Issue.objects.all() if not issue.completed)
+    return content
+
+def renderIssue(issue):
+    content = f"<h1>{issue.name}</h1>"
     return content
     
-class IssuesView(LoginRequiredMixin, View):
+class AllIssuesView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, "generic.html", dict(content=renderIssues()))
+
+class IssueView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        #if is owner, give form instead
+        issue = Issue.objects.get(pk=pk)
+        return render(request, "generic.html", dict(content=renderIssue(issue)))        
 
 class CreateIssueView(LoginRequiredMixin, View):
     def get(self, request):
